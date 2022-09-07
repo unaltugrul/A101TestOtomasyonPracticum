@@ -12,4 +12,7 @@ public class SepetPage extends BasePage{
 
     @FindBy(xpath = "//div[@class='basket-list']//a[@class='title']")
     public WebElement eklenenUrun;
+
+    @FindBy(xpath = "//div[@class='col-sm-3']//a[@title='Sepeti Onayla']")
+    public WebElement sepetiOnaylaButonu;
 }

@@ -7,6 +7,7 @@ import com.a101.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.interactions.Actions;
 
@@ -58,6 +59,19 @@ public class Odeme_ekrani_test_steps {
     @Then("Kullanici acilan urunun siyah oldugunu gorur")
     public void kullanici_acilan_urunun_siyah_oldugunu_gorur() {
         Assert.assertEquals("SİYAH",penKad50DenPanCorSiyah.renk.getText());
+    }
+
+    @When("Kullanici sepete ekle butonuna tiklar")
+    public void kullanici_sepete_ekle_butonuna_tiklar() {
+
+    }
+    @When("Kullanici sepeti goruntule linkine tiklar")
+    public void kullanici_sepeti_goruntule_linkine_tiklar() {
+
+    }
+    @Then("Kullanici ekledigi urunu sepette gorur")
+    public void kullanici_ekledigi_urunu_sepette_gorur() {
+
     }
 
 

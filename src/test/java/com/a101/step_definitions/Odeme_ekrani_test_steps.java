@@ -2,7 +2,7 @@ package com.a101.step_definitions;
 
 import com.a101.pages.DizaltiCorapPage;
 import com.a101.pages.HomePage;
-import com.a101.pages.PenKad50DenPanCorSiyah;
+import com.a101.pages.PenKad50DenPanCorSiyahPage;
 import com.a101.pages.SepetPage;
 import com.a101.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -17,7 +17,7 @@ public class Odeme_ekrani_test_steps {
 
     HomePage homePage = new HomePage();
     DizaltiCorapPage dizaltiCorapPage = new DizaltiCorapPage();
-    PenKad50DenPanCorSiyah penKad50DenPanCorSiyah = new PenKad50DenPanCorSiyah();
+    PenKad50DenPanCorSiyahPage penKad50DenPanCorSiyah = new PenKad50DenPanCorSiyahPage();
     SepetPage sepetPage = new SepetPage();
     String eklenenUrunName;
 
@@ -70,7 +70,40 @@ public class Odeme_ekrani_test_steps {
 
     @Then("Kullanici ekledigi urunu sepette gorur")
     public void kullanici_ekledigi_urunu_sepette_gorur() {
-        Assert.assertEquals(eklenenUrunName,sepetPage.eklenenUrun.getAttribute("title"));
+
+    }
+
+    @When("Kullanici sepeti onayla butonuna basar")
+    public void kullanici_sepeti_onayla_butonuna_basar() {
+
+    }
+    @When("Kullanici uye olmadan devam et butonuna basar")
+    public void kullanici_uye_olmadan_devam_et_butonuna_basar() {
+
+    }
+    @When("Kullanici mail adresini yazar ve devam et butonuna basa")
+    public void kullanici_mail_adresini_yazar_ve_devam_et_butonuna_basa() {
+
+    }
+    @When("Kullanici yeni adres olustur linkine tiklar")
+    public void kullanici_yeni_adres_olustur_linkine_tiklar() {
+
+    }
+    @When("Kullanici gerekli bilgileri kutulara isler ve kaydet butonuna basar")
+    public void kullanici_gerekli_bilgileri_kutulara_isler_ve_kaydet_butonuna_basar() {
+
+    }
+    @When("Kullanici kaydet ve devam et butonuna tiklar")
+    public void kullanici_kaydet_ve_devam_et_butonuna_tiklar() {
+
+    }
+    @When("Kullanici yanlis odeme bilgilerini girer ve siparisi tamamla butonuna basar")
+    public void kullanici_yanlis_odeme_bilgilerini_girer_ve_siparisi_tamamla_butonuna_basar() {
+
+    }
+    @Then("Kullanici kart bilgilerinizi kontrol ediniz hatasini gorur")
+    public void kullanici_kart_bilgilerinizi_kontrol_ediniz_hatasini_gorur() {
+
     }
 
 

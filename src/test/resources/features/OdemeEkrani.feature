@@ -3,7 +3,6 @@ Feature:Odeme Ekranına Ulasmak
   Background:
     Given Kullanici "https://www.a101.com.tr/" adresine yonlenir
     And Kullanici cerez kullanimini kabul eder
-    And Kullanici beliren popup pencereyi kapatir
     Then Kullanici basarili bir sekilde ana sayfaya ulasir
 
   @TC001

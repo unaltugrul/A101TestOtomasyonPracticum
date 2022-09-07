@@ -36,16 +36,6 @@ public class Odeme_ekrani_test_steps {
         homePage.cerezKabulButton.click();
     }
 
-    /*@And("Kullanici beliren popup pencereyi kapatir")
-    public void kullanici_beliren_popup_pencereyi_kapatir() {
-        try {
-            homePage.popupClose.click();
-        }catch (Exception e){
-            System.out.println("pop-up gosterilmedi");
-        }
-
-    }*/
-
     @Given("Kullanici giyim ve aksesuar modulu uzerinde fareyi bekletir")
     public void kullanici_giyim_ve_aksesuar_modulu_uzerinde_fareyi_bekletir() {
         Actions actions = new Actions(Driver.getDriver());

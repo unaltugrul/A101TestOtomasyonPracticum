@@ -13,4 +13,30 @@ public class CheckoutPage {
     @FindBy(xpath = "//a[@title='ÜYE OLMADAN DEVAM ET']")
     public WebElement uyeOlmadanDevamButonu;
 
+    @FindBy(name = "user_email")
+    public WebElement emailGirisKutusu;
+
+    @FindBy(xpath = "(//a[@class='new-address js-new-address'])[1]")
+    public WebElement yeniAdresOlusturLink;
+
+    //*****Adres güncelleme kutucukları kısmı
+
+    @FindBy(name = "title")
+    public WebElement adresBasligiKutusu;
+
+    @FindBy(name = "//input[@name='first_name']")
+    public WebElement adKutusu;
+
+    @FindBy(name = "last_name")
+    public WebElement soyadKutusu;
+
+    @FindBy(name = "phone_number")
+    public WebElement telNumarasiKutusu;
+
+    @FindBy(name = "city")
+    public WebElement sehirSecimiSelectDropdown;
+
+
+
+
 }

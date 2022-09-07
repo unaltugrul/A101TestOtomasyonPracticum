@@ -13,5 +13,8 @@ public class PenKad50DenPanCorSiyah extends BasePage{
     @FindBy(xpath = "//div[@class='selected-variant-text']//span")
     public WebElement renk;
 
+    @FindBy(xpath = "//a[@class='go-to-shop']")
+    public WebElement sepetiGoruntule;
+
 
 }

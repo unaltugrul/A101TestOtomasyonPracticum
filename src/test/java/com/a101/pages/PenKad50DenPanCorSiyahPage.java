@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class PenKad50DenPanCorSiyah extends BasePage{
-    public PenKad50DenPanCorSiyah(){
+public class PenKad50DenPanCorSiyahPage extends BasePage{
+    public PenKad50DenPanCorSiyahPage(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
 

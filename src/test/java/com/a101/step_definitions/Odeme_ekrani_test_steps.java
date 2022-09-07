@@ -1,10 +1,8 @@
 package com.a101.step_definitions;
 
-import com.a101.pages.DizaltiCorapPage;
-import com.a101.pages.HomePage;
-import com.a101.pages.PenKad50DenPanCorSiyahPage;
-import com.a101.pages.SepetPage;
+import com.a101.pages.*;
 import com.a101.utilities.Driver;
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,7 +17,9 @@ public class Odeme_ekrani_test_steps {
     DizaltiCorapPage dizaltiCorapPage = new DizaltiCorapPage();
     PenKad50DenPanCorSiyahPage penKad50DenPanCorSiyah = new PenKad50DenPanCorSiyahPage();
     SepetPage sepetPage = new SepetPage();
+    CheckoutPage checkoutPage = new CheckoutPage();
     String eklenenUrunName;
+    Faker faker = new Faker();
 
     @Given("Kullanici {string} adresine yonlenir")
     public void kullanici_adresine_yonlenir(String url) {
@@ -70,24 +70,25 @@ public class Odeme_ekrani_test_steps {
 
     @Then("Kullanici ekledigi urunu sepette gorur")
     public void kullanici_ekledigi_urunu_sepette_gorur() {
-
+        Assert.assertEquals(eklenenUrunName,sepetPage.eklenenUrun.getAttribute("title"));
     }
 
     @When("Kullanici sepeti onayla butonuna basar")
     public void kullanici_sepeti_onayla_butonuna_basar() {
-
+        sepetPage.sepetiOnaylaButonu.click();
     }
     @When("Kullanici uye olmadan devam et butonuna basar")
     public void kullanici_uye_olmadan_devam_et_butonuna_basar() {
-
+        checkoutPage.uyeOlmadanDevamButonu.click();
     }
-    @When("Kullanici mail adresini yazar ve devam et butonuna basa")
-    public void kullanici_mail_adresini_yazar_ve_devam_et_butonuna_basa() {
-
+    @And("Kullanici mail adresini yazar enter tusuna basar")
+    public void kullaniciMailAdresiniYazarEnterTusunaBasar() {
+        String email = faker.internet().emailAddress();
+        checkoutPage.emailGirisKutusu.sendKeys(email);
     }
     @When("Kullanici yeni adres olustur linkine tiklar")
     public void kullanici_yeni_adres_olustur_linkine_tiklar() {
-
+        checkoutPage.yeniAdresOlusturLink.click();
     }
     @When("Kullanici gerekli bilgileri kutulara isler ve kaydet butonuna basar")
     public void kullanici_gerekli_bilgileri_kutulara_isler_ve_kaydet_butonuna_basar() {
@@ -105,6 +106,7 @@ public class Odeme_ekrani_test_steps {
     public void kullanici_kart_bilgilerinizi_kontrol_ediniz_hatasini_gorur() {
 
     }
+
 
 
 }

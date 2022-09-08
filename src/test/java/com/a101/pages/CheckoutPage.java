@@ -1,9 +1,12 @@
 package com.a101.pages;
 
 import com.a101.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class CheckoutPage {
     public CheckoutPage(){
@@ -24,7 +27,7 @@ public class CheckoutPage {
     @FindBy(name = "title")
     public WebElement adresBasligiKutusu;
 
-    @FindBy(name = "//input[@name='first_name']")
+    @FindBy(name = "first_name")
     public WebElement adKutusu;
 
     @FindBy(name = "last_name")
@@ -33,8 +36,49 @@ public class CheckoutPage {
     @FindBy(name = "phone_number")
     public WebElement telNumarasiKutusu;
 
-    @FindBy(name = "city")
-    public WebElement sehirSecimiSelectDropdown;
+    @FindBy(xpath = "//select[@name='city']")
+    public WebElement ilDropdown;
+
+    @FindBy(xpath = "//select[@name='township']")
+    public WebElement ilceDropdown;
+
+    @FindBy(xpath = "//select[@name='district']")
+    public WebElement mahDropdown;
+
+    @FindBy(name = "line")
+    public WebElement adreskutusu;
+
+    @FindBy(name = "postcode")
+    public WebElement postKodKutusu;
+
+    //ilçe sayısı bulmak için bu metodu kullanacağım
+
+    public int ilceSayisi(){
+        List<WebElement> ilceler = Driver.getDriver().findElements(By.xpath("//select[@name='township']"));
+        return ilceler.size();
+    }
+
+    //Mahalle sayısını bulmak için bu metodu kullanacağım
+    public int mahalleSayisi(){
+        List<WebElement> mahalleler = Driver.getDriver().findElements(By.xpath("//select[@name='district']"));
+        return mahalleler.size();
+    }
+
+    //************** Kargo bilgileri kısmı
+
+    @FindBy(xpath = "//button[@class='button green js-set-country js-prevent-emoji']")
+    public WebElement kaydetButonu;
+
+    @FindBy(xpath = "//ul[@class='js-shipping-list']//input[@type='radio']")
+    public List<WebElement> kargoFirmalari;
+
+    @FindBy(xpath = "//button[@class='button block green js-proceed-button']")
+    public WebElement kaydetDevamEtButonu;
+
+
+
+
+
 
 
 

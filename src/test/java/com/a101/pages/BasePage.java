@@ -23,4 +23,11 @@ public abstract class BasePage {
     @FindBy(xpath = "//button[@class='add-to-basket button green block with-icon js-add-basket']")
     public WebElement sepeteEkleButon;
 
+    //********************Alternatif arayüz için
+    @FindBy(xpath = "//div[@class='hype-link hype-dropdown hype-categories-link']")
+    public WebElement kategoriler;
+
+    @FindBy(xpath = "(//a[@title='GİYİM & AKSESUAR'])[1]")
+    public WebElement giyimAksesuar;
+
 }

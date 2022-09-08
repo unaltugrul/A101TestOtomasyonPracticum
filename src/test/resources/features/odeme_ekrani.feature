@@ -19,7 +19,7 @@ Feature:Odeme Ekranına Ulasmak
     And Kullanici gerekli bilgileri kutulara isler ve kaydet butonuna basar
     And Kullanici kaydet ve devam et butonuna tiklar
     And Kullanici yanlis odeme bilgilerini girer ve siparisi tamamla butonuna basar
-    Then Kullanici kart bilgilerinizi kontrol ediniz hatasini gorur
+    Then Kullanici kart bilgilerinizi kontrol ediniz mesajini gorur
 
 
 

@@ -16,7 +16,17 @@ Feature:Odeme Ekranına Ulasmak
     And Kullanici uye olmadan devam et butonuna basar
     And Kullanici mail adresini yazar enter tusuna basar
     When Kullanici yeni adres olustur linkine tiklar
-    And Kullanici gerekli bilgileri kutulara isler ve kaydet butonuna basar
+    And Kullanici adres basligi girer
+    And Kullanici adini girer
+    And Kullanici Soyadini girer
+    And Kullanici cep telefon numarasını girer
+    And Kullanici il secer
+    And Kullanici ilce secer
+    And Kullanici mahalle secer
+    And Kullanici adres girer
+    And Kullanici posta kodu girer
+    And Kullanici kaydet butonuna basar
+    And Kullanici kargo firmasi secer
     And Kullanici kaydet ve devam et butonuna tiklar
     And Kullanici yanlis odeme bilgilerini girer ve siparisi tamamla butonuna basar
     Then Kullanici kart bilgilerinizi kontrol ediniz mesajini gorur

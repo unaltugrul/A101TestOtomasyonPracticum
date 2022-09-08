@@ -54,13 +54,13 @@ public class CheckoutPage {
     //ilçe sayısı bulmak için bu metodu kullanacağım
 
     public int ilceSayisi(){
-        List<WebElement> ilceler = Driver.getDriver().findElements(By.xpath("//select[@name='township']"));
+        List<WebElement> ilceler = Driver.getDriver().findElements(By.xpath("//select[@name='township']//option"));
         return ilceler.size();
     }
 
     //Mahalle sayısını bulmak için bu metodu kullanacağım
     public int mahalleSayisi(){
-        List<WebElement> mahalleler = Driver.getDriver().findElements(By.xpath("//select[@name='district']"));
+        List<WebElement> mahalleler = Driver.getDriver().findElements(By.xpath("//select[@name='district']//option"));
         return mahalleler.size();
     }
 
@@ -69,11 +69,34 @@ public class CheckoutPage {
     @FindBy(xpath = "//button[@class='button green js-set-country js-prevent-emoji']")
     public WebElement kaydetButonu;
 
-    @FindBy(xpath = "//ul[@class='js-shipping-list']//input[@type='radio']")
-    public List<WebElement> kargoFirmalari;
+    @FindBy(xpath = "//ul[@class='js-shipping-list']//div[@class='check']")
+    public List<WebElement> kargoFirButonlari;
 
     @FindBy(xpath = "//button[@class='button block green js-proceed-button']")
     public WebElement kaydetDevamEtButonu;
+
+    //****************Ödeme ekranı
+    @FindBy(xpath = "(//input[@name='name'])[2]")
+    public WebElement adSoyadKutusu;
+
+    @FindBy(xpath = "//input[@class='js-masterpassbin-payment-card']")
+    public WebElement kartNumarasi;
+
+    @FindBy(xpath = "(//select[@name='card_month'])[2]")
+    public WebElement kartAyDropdown;
+
+    @FindBy(xpath = "(//select[@name='card_year'])[2]")
+    public WebElement kartYilDropdown;
+
+    @FindBy(xpath = "(//input[@name='card_cvv'])[2]")
+    public WebElement cvcKutusu;
+
+    @FindBy(id = "agrement2")
+    public WebElement kontrolKutusu;
+
+    @FindBy(xpath = "(//button[@class='button block green continue-button'])[2]")
+    public WebElement sipTamamlaButonu;
+
 
 
 

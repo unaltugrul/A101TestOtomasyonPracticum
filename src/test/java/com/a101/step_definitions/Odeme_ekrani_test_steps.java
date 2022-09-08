@@ -1,6 +1,7 @@
 package com.a101.step_definitions;
 
 import com.a101.pages.*;
+import com.a101.utilities.BrowserUtils;
 import com.a101.utilities.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
@@ -8,7 +9,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Odeme_ekrani_test_steps {
@@ -38,8 +46,17 @@ public class Odeme_ekrani_test_steps {
 
     @Given("Kullanici giyim ve aksesuar modulu uzerinde fareyi bekletir")
     public void kullanici_giyim_ve_aksesuar_modulu_uzerinde_fareyi_bekletir() {
-        Actions actions = new Actions(Driver.getDriver());
-        actions.moveToElement(homePage.giyimAksesuarModul).perform();
+        try {
+            Actions actions = new Actions(Driver.getDriver());
+            actions.moveToElement(homePage.giyimAksesuarModul).perform();
+        }catch (ElementNotInteractableException e){
+            System.out.println("Farklı arayüz kullanılmaya başlandı...");
+            Actions actions1 = new Actions(Driver.getDriver());
+            actions1.moveToElement(homePage.kategoriler).perform();
+            actions1.moveToElement(homePage.giyimAksesuar).perform();
+
+        }
+
     }
 
     @Given("Kullanici acilan menuden Kadin Ic Giyim ve Dizalti Corap kategorisine tiklar")
@@ -49,6 +66,7 @@ public class Odeme_ekrani_test_steps {
 
     @Given("Kullanici urun listesindeki ilk urunu tiklar")
     public void kullanici_urun_listesindeki_ilk_urunu_tiklar() {
+        BrowserUtils.sleep(1);
         eklenenUrunName = dizaltiCorapPage.ilkUrunLink.getAttribute("title");
         dizaltiCorapPage.ilkUrunLink.click();
     }
@@ -65,6 +83,7 @@ public class Odeme_ekrani_test_steps {
 
     @When("Kullanici sepeti goruntule linkine tiklar")
     public void kullanici_sepeti_goruntule_linkine_tiklar() {
+        BrowserUtils.sleep(1);
         penKad50DenPanCorSiyah.sepetiGoruntule.click();
     }
 
@@ -84,16 +103,50 @@ public class Odeme_ekrani_test_steps {
     @And("Kullanici mail adresini yazar enter tusuna basar")
     public void kullaniciMailAdresiniYazarEnterTusunaBasar() {
         String email = faker.internet().emailAddress();
-        checkoutPage.emailGirisKutusu.sendKeys(email);
+        checkoutPage.emailGirisKutusu.sendKeys(email + Keys.ENTER);
     }
     @When("Kullanici yeni adres olustur linkine tiklar")
     public void kullanici_yeni_adres_olustur_linkine_tiklar() {
         checkoutPage.yeniAdresOlusturLink.click();
     }
-    @When("Kullanici gerekli bilgileri kutulara isler ve kaydet butonuna basar")
-    public void kullanici_gerekli_bilgileri_kutulara_isler_ve_kaydet_butonuna_basar() {
+    @When("Kullanici kaydet butonuna basar")
+    public void kullanici_kaydet_butonuna_basar() {
+        checkoutPage.adresBasligiKutusu.sendKeys(faker.address().firstName());
+        checkoutPage.adKutusu.sendKeys(faker.name().firstName());
+        checkoutPage.soyadKutusu.sendKeys(faker.name().lastName());
+        checkoutPage.telNumarasiKutusu.sendKeys(faker.numerify("###-###-####"));
 
+        Select select = new Select(checkoutPage.ilDropdown);
+        select.selectByIndex(faker.number().numberBetween(2,82));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(By.xpath("//select[@name='township']//option[2]"))));
+
+        Select select1 = new Select(checkoutPage.ilceDropdown);
+        int ilceSay= checkoutPage.ilceSayisi();
+        System.out.println("ilceSay = " + ilceSay);
+        select1.selectByIndex(faker.number().numberBetween(2,ilceSay));
+
+        WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
+        wait1.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option[2]"))));
+
+        Select select2 = new Select(checkoutPage.mahDropdown);
+        int mahSay = checkoutPage.mahalleSayisi();
+        System.out.println("mahSay = " + mahSay);
+        select2.selectByIndex(faker.number().numberBetween(2,mahSay));
+
+
+
+        checkoutPage.adreskutusu.sendKeys(faker.address().fullAddress());
+        BrowserUtils.sleep(1);
+        checkoutPage.postKodKutusu.sendKeys(faker.numerify("#####"));
+        BrowserUtils.sleep(1);
+        checkoutPage.kaydetButonu.click();
     }
+
+    @And("Kullanici kargo firmasi secer")
+    public void kullaniciKargoFirmasiSecer() {
+    }
+
     @When("Kullanici kaydet ve devam et butonuna tiklar")
     public void kullanici_kaydet_ve_devam_et_butonuna_tiklar() {
 

@@ -102,8 +102,8 @@ public class Odeme_ekrani_test_steps {
     public void kullanici_yanlis_odeme_bilgilerini_girer_ve_siparisi_tamamla_butonuna_basar() {
 
     }
-    @Then("Kullanici kart bilgilerinizi kontrol ediniz hatasini gorur")
-    public void kullanici_kart_bilgilerinizi_kontrol_ediniz_hatasini_gorur() {
+    @Then("Kullanici kart bilgilerinizi kontrol ediniz mesajini gorur")
+    public void kullanici_kart_bilgilerinizi_kontrol_ediniz_mesajini_gorur() {
 
     }
 

@@ -19,7 +19,7 @@ Feature:Odeme Ekranına Ulasmak
     And Kullanici adres basligi girer
     And Kullanici adini girer
     And Kullanici Soyadini girer
-    And Kullanici cep telefon numarasını girer
+    And Kullanici cep telefon numarasini girer
     And Kullanici il secer
     And Kullanici ilce secer
     And Kullanici mahalle secer
@@ -28,7 +28,8 @@ Feature:Odeme Ekranına Ulasmak
     And Kullanici kaydet butonuna basar
     And Kullanici kargo firmasi secer
     And Kullanici kaydet ve devam et butonuna tiklar
-    And Kullanici yanlis odeme bilgilerini girer ve siparisi tamamla butonuna basar
+    And Kullanici yanlis odeme bilgilerini girer ve sozlesmeyi kabul eder
+    And Kullanici siparisi tamamla butonuna basar
     Then Kullanici kart bilgilerinizi kontrol ediniz mesajini gorur
 
 

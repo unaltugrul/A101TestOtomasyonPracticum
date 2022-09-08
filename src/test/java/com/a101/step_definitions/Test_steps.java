@@ -9,17 +9,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class Odeme_ekrani_test_steps {
+public class Test_steps {
 
     HomePage homePage = new HomePage();
     DizaltiCorapPage dizaltiCorapPage = new DizaltiCorapPage();
@@ -50,11 +47,10 @@ public class Odeme_ekrani_test_steps {
             Actions actions = new Actions(Driver.getDriver());
             actions.moveToElement(homePage.giyimAksesuarModul).perform();
         }catch (ElementNotInteractableException e){
-            System.out.println("Farklı arayüz kullanılmaya başlandı...");
+            BrowserUtils.sleep(1);
             Actions actions1 = new Actions(Driver.getDriver());
             actions1.moveToElement(homePage.kategoriler).perform();
             actions1.moveToElement(homePage.giyimAksesuar).perform();
-
         }
 
     }
@@ -83,7 +79,8 @@ public class Odeme_ekrani_test_steps {
 
     @When("Kullanici sepeti goruntule linkine tiklar")
     public void kullanici_sepeti_goruntule_linkine_tiklar() {
-        BrowserUtils.sleep(1);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.visibilityOf(penKad50DenPanCorSiyah.sepetiGoruntule));
         penKad50DenPanCorSiyah.sepetiGoruntule.click();
     }
 
@@ -94,6 +91,7 @@ public class Odeme_ekrani_test_steps {
 
     @When("Kullanici sepeti onayla butonuna basar")
     public void kullanici_sepeti_onayla_butonuna_basar() {
+        BrowserUtils.sleep(1);
         sepetPage.sepetiOnaylaButonu.click();
     }
     @When("Kullanici uye olmadan devam et butonuna basar")
@@ -109,52 +107,98 @@ public class Odeme_ekrani_test_steps {
     public void kullanici_yeni_adres_olustur_linkine_tiklar() {
         checkoutPage.yeniAdresOlusturLink.click();
     }
-    @When("Kullanici kaydet butonuna basar")
-    public void kullanici_kaydet_butonuna_basar() {
+    @When("Kullanici adres basligi girer")
+    public void kullanici_adres_basligi_girer() {
         checkoutPage.adresBasligiKutusu.sendKeys(faker.address().firstName());
+    }
+    @When("Kullanici adini girer")
+    public void kullanici_adini_girer() {
         checkoutPage.adKutusu.sendKeys(faker.name().firstName());
+    }
+    @When("Kullanici Soyadini girer")
+    public void kullanici_soyadini_girer() {
         checkoutPage.soyadKutusu.sendKeys(faker.name().lastName());
+    }
+    @When("Kullanici cep telefon numarasini girer")
+    public void kullanici_cep_telefon_numarasini_girer() {
         checkoutPage.telNumarasiKutusu.sendKeys(faker.numerify("###-###-####"));
 
+    }
+    @When("Kullanici il secer")
+    public void kullanici_il_secer() {
         Select select = new Select(checkoutPage.ilDropdown);
         select.selectByIndex(faker.number().numberBetween(2,82));
+    }
+    @When("Kullanici ilce secer")
+    public void kullanici_ilce_secer() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
-        wait.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(By.xpath("//select[@name='township']//option[2]"))));
-
+        wait.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='township']//option"))));
         Select select1 = new Select(checkoutPage.ilceDropdown);
         int ilceSay= checkoutPage.ilceSayisi();
-        System.out.println("ilceSay = " + ilceSay);
         select1.selectByIndex(faker.number().numberBetween(2,ilceSay));
 
+    }
+    @When("Kullanici mahalle secer")
+    public void kullanici_mahalle_secer() {
         WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
-        wait1.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option[2]"))));
+        wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
 
         Select select2 = new Select(checkoutPage.mahDropdown);
+        BrowserUtils.sleep(1);
         int mahSay = checkoutPage.mahalleSayisi();
-        System.out.println("mahSay = " + mahSay);
         select2.selectByIndex(faker.number().numberBetween(2,mahSay));
-
-
-
+    }
+    @When("Kullanici adres girer")
+    public void kullanici_adres_girer() {
         checkoutPage.adreskutusu.sendKeys(faker.address().fullAddress());
-        BrowserUtils.sleep(1);
+    }
+    @When("Kullanici posta kodu girer")
+    public void kullanici_posta_kodu_girer() {
         checkoutPage.postKodKutusu.sendKeys(faker.numerify("#####"));
-        BrowserUtils.sleep(1);
+    }
+
+    @When("Kullanici kaydet butonuna basar")
+    public void kullanici_kaydet_butonuna_basar() {
         checkoutPage.kaydetButonu.click();
     }
 
     @And("Kullanici kargo firmasi secer")
     public void kullaniciKargoFirmasiSecer() {
+       /* WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(By.xpath("//ul[@class='js-shipping-list']//input[@type='radio']"))));*/
+        BrowserUtils.sleep(2);
+        checkoutPage.kargoFirButonlari.get(faker.number().numberBetween(0,checkoutPage.kargoFirButonlari.size()-1)).click();
     }
 
     @When("Kullanici kaydet ve devam et butonuna tiklar")
     public void kullanici_kaydet_ve_devam_et_butonuna_tiklar() {
+        checkoutPage.kaydetDevamEtButonu.click();
+    }
+
+    @And("Kullanici yanlis odeme bilgilerini girer ve sozlesmeyi kabul eder")
+    public void kullaniciYanlisOdemeBilgileriniGirerVeSozlesmeyiKabulEder() {
+        checkoutPage.adSoyadKutusu.sendKeys(faker.name().name() + " " + faker.name().lastName());
+        checkoutPage.kartNumarasi.sendKeys(faker.numerify("2232-####-####-####"));
+        Select select = new Select(checkoutPage.kartAyDropdown);
+        select.selectByIndex(faker.number().numberBetween(1,12));
+
+        Select select1 = new Select(checkoutPage.kartYilDropdown);
+        select1.selectByIndex(faker.number().numberBetween(1,12));
+
+        String cvc = String.valueOf(faker.number().numberBetween(100,999));
+        checkoutPage.cvcKutusu.sendKeys(cvc);
+
+        WebElement element = checkoutPage.kontrolKutusu;
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        jse.executeScript("arguments[0].click();", element);
 
     }
-    @When("Kullanici yanlis odeme bilgilerini girer ve siparisi tamamla butonuna basar")
-    public void kullanici_yanlis_odeme_bilgilerini_girer_ve_siparisi_tamamla_butonuna_basar() {
 
+    @And("Kullanici siparisi tamamla butonuna basar")
+    public void kullaniciSiparisiTamamlaButonunaBasar() {
+        checkoutPage.sipTamamlaButonu.click();
     }
+
     @Then("Kullanici kart bilgilerinizi kontrol ediniz mesajini gorur")
     public void kullanici_kart_bilgilerinizi_kontrol_ediniz_mesajini_gorur() {
 

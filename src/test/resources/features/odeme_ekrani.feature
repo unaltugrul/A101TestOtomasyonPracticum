@@ -28,9 +28,8 @@ Feature:Odeme Ekranına Ulasmak
     And Kullanici kaydet butonuna basar
     And Kullanici kargo firmasi secer
     And Kullanici kaydet ve devam et butonuna tiklar
-    And Kullanici yanlis odeme bilgilerini girer ve sozlesmeyi kabul eder
     And Kullanici siparisi tamamla butonuna basar
-    Then Kullanici kart bilgilerinizi kontrol ediniz mesajini gorur
+    Then Kullanici hata mesajini gorur
 
 
 

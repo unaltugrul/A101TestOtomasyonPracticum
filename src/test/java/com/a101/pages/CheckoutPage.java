@@ -97,6 +97,16 @@ public class CheckoutPage {
     @FindBy(xpath = "(//button[@class='button block green continue-button'])[2]")
     public WebElement sipTamamlaButonu;
 
+    //Lütfen kart seçin veya kart bilgisi girin.(hata mesajı)
+    @FindBy(xpath = "(//span[@class='error'])[2]")
+    public WebElement error1;
+
+    //Kart bilgilerinizi kontrol ediniz.(hata mesajı)
+    @FindBy(xpath = "(//div[@class='error checkout__error js-error-card_number '])[2]")
+    public WebElement error2;
+
+
+
 
 
 

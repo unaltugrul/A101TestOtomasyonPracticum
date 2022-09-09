@@ -16,7 +16,7 @@ public abstract class BasePage {
     public WebElement giyimAksesuarModul;
 
     //diz altı çorap alt kategori link
-    @FindBy(xpath = "//a[@title='Dizaltı Çorap']")
+    @FindBy(linkText = "Dizaltı Çorap")
     public WebElement dizaltiCorap;
 
     //sepete ekle butonu

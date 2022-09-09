@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.NoSuchElementException;
+
 
 public class Test_steps {
 
@@ -33,14 +35,18 @@ public class Test_steps {
 
     @Then("Kullanici basarili bir sekilde ana sayfaya ulasir")
     public void kullanici_basarili_bir_sekilde_ana_sayfaya_ulasir() {
+        BrowserUtils.sleep(1);
         Assert.assertEquals(Driver.getDriver().getCurrentUrl(),"https://www.a101.com.tr/");
     }
 
     @And("Kullanici cerez kullanimini kabul eder")
     public void kullanici_cerez_kullanimini_kabul_eder() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
-        wait.until(ExpectedConditions.visibilityOf(homePage.cerezKabulButton));
-        homePage.cerezKabulButton.click();
+        try {
+            homePage.cerezKabulButton.click();
+        }catch (NoSuchElementException e){
+
+        }
+
     }
 
     @Given("Kullanici giyim ve aksesuar modulu uzerinde fareyi bekletir")
@@ -64,7 +70,8 @@ public class Test_steps {
 
     @Given("Kullanici urun listesindeki ilk urunu tiklar")
     public void kullanici_urun_listesindeki_ilk_urunu_tiklar() {
-        BrowserUtils.sleep(1);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.visibilityOf(Driver.getDriver().findElement(By.xpath("//div[@class='products-list']"))));
         eklenenUrunName = dizaltiCorapPage.ilkUrunLink.getAttribute("title");
         dizaltiCorapPage.ilkUrunLink.click();
     }
@@ -123,8 +130,7 @@ public class Test_steps {
     }
     @When("Kullanici cep telefon numarasini girer")
     public void kullanici_cep_telefon_numarasini_girer() {
-        checkoutPage.telNumarasiKutusu.sendKeys(faker.numerify("###-###-####"));
-        BrowserUtils.sleep(1);
+        checkoutPage.telNumarasiKutusu.sendKeys("3126477178");
     }
     @When("Kullanici il secer")
     public void kullanici_il_secer() {
@@ -142,8 +148,15 @@ public class Test_steps {
     }
     @When("Kullanici mahalle secer")
     public void kullanici_mahalle_secer() {
-        WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
-        wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
+
+        try {
+
+            WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
+            wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
+
+        }catch (StaleElementReferenceException e){
+
+        }
 
         Select select2 = new Select(checkoutPage.mahDropdown);
         int mahSay = checkoutPage.mahalleSayisi();
@@ -165,8 +178,6 @@ public class Test_steps {
 
     @And("Kullanici kargo firmasi secer")
     public void kullaniciKargoFirmasiSecer() {
-       /* WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
-        wait.until(ExpectedConditions.elementToBeClickable(Driver.getDriver().findElement(By.xpath("//ul[@class='js-shipping-list']//input[@type='radio']"))));*/
         BrowserUtils.sleep(2);
         checkoutPage.kargoFirButonlari.get(faker.number().numberBetween(0,checkoutPage.kargoFirButonlari.size()-1)).click();
     }
@@ -179,7 +190,7 @@ public class Test_steps {
     /*@And("Kullanici yanlis odeme bilgilerini girer ve sozlesmeyi kabul eder")
     public void kullaniciYanlisOdemeBilgileriniGirerVeSozlesmeyiKabulEder() {
         checkoutPage.adSoyadKutusu.sendKeys(faker.name().name() + " " + faker.name().lastName());
-        checkoutPage.kartNumarasi.sendKeys(faker.numerify("4543-####-####-####"));
+        checkoutPage.kartNumarasi.sendKeys(faker.numerify("################"));
         Select select = new Select(checkoutPage.kartAyDropdown);
         select.selectByIndex(faker.number().numberBetween(1,12));
 
@@ -204,5 +215,6 @@ public class Test_steps {
     @Then("Kullanici hata mesajini gorur")
     public void kullaniciHataMesajiniGorur() {
         Assert.assertTrue(checkoutPage.error1.isDisplayed());
+
     }
 }

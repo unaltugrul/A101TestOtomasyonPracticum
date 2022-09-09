@@ -13,7 +13,7 @@ public class PenKad50DenPanCorSiyahPage extends BasePage{
     @FindBy(xpath = "//div[@class='selected-variant-text']//span")
     public WebElement renk;
 
-    @FindBy(xpath = "//a[@class='go-to-shop']")
+    @FindBy(linkText = "Sepeti Görüntüle")
     public WebElement sepetiGoruntule;
 
 

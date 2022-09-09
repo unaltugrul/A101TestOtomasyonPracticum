@@ -38,6 +38,8 @@ public class Test_steps {
 
     @And("Kullanici cerez kullanimini kabul eder")
     public void kullanici_cerez_kullanimini_kabul_eder() {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.visibilityOf(homePage.cerezKabulButton));
         homePage.cerezKabulButton.click();
     }
 
@@ -122,7 +124,7 @@ public class Test_steps {
     @When("Kullanici cep telefon numarasini girer")
     public void kullanici_cep_telefon_numarasini_girer() {
         checkoutPage.telNumarasiKutusu.sendKeys(faker.numerify("###-###-####"));
-
+        BrowserUtils.sleep(1);
     }
     @When("Kullanici il secer")
     public void kullanici_il_secer() {
@@ -144,7 +146,6 @@ public class Test_steps {
         wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
 
         Select select2 = new Select(checkoutPage.mahDropdown);
-        BrowserUtils.sleep(1);
         int mahSay = checkoutPage.mahalleSayisi();
         select2.selectByIndex(faker.number().numberBetween(2,mahSay));
     }
@@ -175,10 +176,10 @@ public class Test_steps {
         checkoutPage.kaydetDevamEtButonu.click();
     }
 
-    @And("Kullanici yanlis odeme bilgilerini girer ve sozlesmeyi kabul eder")
+    /*@And("Kullanici yanlis odeme bilgilerini girer ve sozlesmeyi kabul eder")
     public void kullaniciYanlisOdemeBilgileriniGirerVeSozlesmeyiKabulEder() {
         checkoutPage.adSoyadKutusu.sendKeys(faker.name().name() + " " + faker.name().lastName());
-        checkoutPage.kartNumarasi.sendKeys(faker.numerify("2232-####-####-####"));
+        checkoutPage.kartNumarasi.sendKeys(faker.numerify("4543-####-####-####"));
         Select select = new Select(checkoutPage.kartAyDropdown);
         select.selectByIndex(faker.number().numberBetween(1,12));
 
@@ -191,19 +192,17 @@ public class Test_steps {
         WebElement element = checkoutPage.kontrolKutusu;
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
         jse.executeScript("arguments[0].click();", element);
+        BrowserUtils.sleep(1);
 
-    }
+    }*/
 
     @And("Kullanici siparisi tamamla butonuna basar")
     public void kullaniciSiparisiTamamlaButonunaBasar() {
         checkoutPage.sipTamamlaButonu.click();
     }
 
-    @Then("Kullanici kart bilgilerinizi kontrol ediniz mesajini gorur")
-    public void kullanici_kart_bilgilerinizi_kontrol_ediniz_mesajini_gorur() {
-
+    @Then("Kullanici hata mesajini gorur")
+    public void kullaniciHataMesajiniGorur() {
+        Assert.assertTrue(checkoutPage.error1.isDisplayed());
     }
-
-
-
 }

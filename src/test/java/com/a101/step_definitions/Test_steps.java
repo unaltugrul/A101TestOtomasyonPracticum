@@ -25,6 +25,7 @@ public class Test_steps {
     PenKad50DenPanCorSiyahPage penKad50DenPanCorSiyah = new PenKad50DenPanCorSiyahPage();
     SepetPage sepetPage = new SepetPage();
     CheckoutPage checkoutPage = new CheckoutPage();
+    GiyimAksesuarPage giyimAksesuarPage = new GiyimAksesuarPage();
     String eklenenUrunName;
     Faker faker = new Faker();
 
@@ -55,10 +56,15 @@ public class Test_steps {
             Actions actions = new Actions(Driver.getDriver());
             actions.moveToElement(homePage.giyimAksesuarModul).perform();
         }catch (ElementNotInteractableException e){
-            BrowserUtils.sleep(1);
-            Actions actions1 = new Actions(Driver.getDriver());
-            actions1.moveToElement(homePage.kategoriler).perform();
-            actions1.moveToElement(homePage.giyimAksesuar).perform();
+            if (homePage.popupClose.isDisplayed()){
+                homePage.popupClose.click();
+            }
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+            wait.until(ExpectedConditions.visibilityOf(homePage.kategoriler));
+            homePage.kategoriler.click();
+            homePage.giyimAksesuar.click();
+            giyimAksesuarPage.kadinIcGiyim.click();
+
         }
 
     }

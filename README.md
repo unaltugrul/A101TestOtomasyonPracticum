@@ -4,7 +4,7 @@
 
 
 
-##Setup
+## Kurulum
 Bu projeyi paralel test yaparak koşturmak için:
 
 ```

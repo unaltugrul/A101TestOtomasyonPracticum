@@ -154,19 +154,16 @@ public class Test_steps {
     }
     @When("Kullanici mahalle secer")
     public void kullanici_mahalle_secer() {
-
+        Select select2 = new Select(checkoutPage.mahDropdown);
         try {
-
             WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
             wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
-
+            int mahSay = checkoutPage.mahalleSayisi();
+            select2.selectByIndex(faker.number().numberBetween(2,mahSay));
         }catch (Exception e){
-
+            int mahSay = checkoutPage.mahalleSayisi();
+            select2.selectByIndex(faker.number().numberBetween(2,mahSay));
         }
-
-        Select select2 = new Select(checkoutPage.mahDropdown);
-        int mahSay = checkoutPage.mahalleSayisi();
-        select2.selectByIndex(faker.number().numberBetween(2,mahSay));
     }
     @When("Kullanici adres girer")
     public void kullanici_adres_girer() {

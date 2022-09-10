@@ -4,10 +4,12 @@ import com.a101.pages.*;
 import com.a101.utilities.BrowserUtils;
 import com.a101.utilities.Driver;
 import com.github.javafaker.Faker;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -47,26 +49,24 @@ public class Test_steps {
         }catch (NoSuchElementException e){
 
         }
-
     }
 
     @Given("Kullanici giyim ve aksesuar modulu uzerinde fareyi bekletir")
     public void kullanici_giyim_ve_aksesuar_modulu_uzerinde_fareyi_bekletir() {
+
         try {
+
+            Actions actions1 = new Actions(Driver.getDriver());
+            actions1.moveToElement(homePage.kategoriler).perform();
+            BrowserUtils.sleep(1);
+            Actions actions2 = new Actions(Driver.getDriver());
+            actions2.moveToElement(homePage.giyimAksesuar).perform();
+            BrowserUtils.sleep(1);
+
+        }catch (Exception e){
             Actions actions = new Actions(Driver.getDriver());
             actions.moveToElement(homePage.giyimAksesuarModul).perform();
-        }catch (ElementNotInteractableException e){
-            if (homePage.popupClose.isDisplayed()){
-                homePage.popupClose.click();
-            }
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
-            wait.until(ExpectedConditions.visibilityOf(homePage.kategoriler));
-            homePage.kategoriler.click();
-            homePage.giyimAksesuar.click();
-            giyimAksesuarPage.kadinIcGiyim.click();
-
         }
-
     }
 
     @Given("Kullanici acilan menuden Kadin Ic Giyim ve Dizalti Corap kategorisine tiklar")

@@ -190,8 +190,8 @@ public class Test_steps {
         checkoutPage.kaydetDevamEtButonu.click();
     }
 
-    /*@And("Kullanici yanlis odeme bilgilerini girer ve sozlesmeyi kabul eder")
-    public void kullaniciYanlisOdemeBilgileriniGirerVeSozlesmeyiKabulEder() {
+    @And("Kullanici odeme bilgilerini girer ve sozlesmeyi kabul eder")
+    public void kullaniciOdemeBilgileriniGirerVeSozlesmeyiKabulEder() {
         checkoutPage.adSoyadKutusu.sendKeys(faker.name().name() + " " + faker.name().lastName());
         checkoutPage.kartNumarasi.sendKeys(faker.numerify("################"));
         Select select = new Select(checkoutPage.kartAyDropdown);
@@ -208,16 +208,24 @@ public class Test_steps {
         jse.executeScript("arguments[0].click();", element);
         BrowserUtils.sleep(1);
 
-    }*/
+    }
 
     @And("Kullanici siparisi tamamla butonuna basar")
     public void kullaniciSiparisiTamamlaButonunaBasar() {
+
+
         checkoutPage.sipTamamlaButonu.click();
     }
 
     @Then("Kullanici hata mesajini gorur")
     public void kullaniciHataMesajiniGorur() {
-        Assert.assertTrue(checkoutPage.error1.isDisplayed());
+
+        try {
+            Assert.assertTrue(checkoutPage.error1.isDisplayed());
+        }catch (Exception e){
+            Assert.assertTrue(checkoutPage.error2.isDisplayed());
+        }
+
 
     }
 }

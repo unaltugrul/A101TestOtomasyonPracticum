@@ -16,7 +16,7 @@ public abstract class BasePage {
     public WebElement giyimAksesuarModul;
 
     //diz altı çorap alt kategori link
-    @FindBy(linkText = "Dizaltı Çorap")
+    @FindBy(xpath = "(//a[@title='Dizaltı Çorap'])[1]")
     public WebElement dizaltiCorap;
 
     //sepete ekle butonu
@@ -29,5 +29,6 @@ public abstract class BasePage {
 
     @FindBy(xpath = "(//a[@title='GİYİM & AKSESUAR'])[1]")
     public WebElement giyimAksesuar;
+
 
 }

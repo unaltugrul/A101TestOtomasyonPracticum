@@ -21,7 +21,7 @@ public class Driver {
             WebDriverManager.chromedriver().setup();
             driverPool.set(new ChromeDriver(options));
             driverPool.get().manage().window().maximize();
-            driverPool.get().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         return driverPool.get();
     }

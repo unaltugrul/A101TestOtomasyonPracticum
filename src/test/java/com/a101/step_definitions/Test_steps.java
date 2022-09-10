@@ -160,7 +160,7 @@ public class Test_steps {
             WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
             wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
 
-        }catch (StaleElementReferenceException e){
+        }catch (Exception e){
 
         }
 

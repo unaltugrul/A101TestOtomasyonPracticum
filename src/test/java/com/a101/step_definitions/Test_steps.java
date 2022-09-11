@@ -58,10 +58,8 @@ public class Test_steps {
 
             Actions actions1 = new Actions(Driver.getDriver());
             actions1.moveToElement(homePage.kategoriler).perform();
-            BrowserUtils.sleep(1);
             Actions actions2 = new Actions(Driver.getDriver());
             actions2.moveToElement(homePage.giyimAksesuar).perform();
-            BrowserUtils.sleep(1);
 
         }catch (Exception e){
             Actions actions = new Actions(Driver.getDriver());
@@ -212,9 +210,9 @@ public class Test_steps {
 
     @And("Kullanici siparisi tamamla butonuna basar")
     public void kullaniciSiparisiTamamlaButonunaBasar() {
-
-
         checkoutPage.sipTamamlaButonu.click();
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),3);
+        wait.until(ExpectedConditions.invisibilityOf(checkoutPage.spinner));
     }
 
     @Then("Kullanici hata mesajini gorur")

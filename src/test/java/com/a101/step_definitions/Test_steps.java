@@ -67,16 +67,17 @@ public class Test_steps {
         }
     }
 
-    @Given("Kullanici acilan menuden Kadin Ic Giyim ve Dizalti Corap kategorisine tiklar")
-    public void kullanici_acilan_menuden_kadin_ic_giyim_ve_dizalti_corap_kategorisine_tiklar() {
+    @Given("Kullanici acilan menuden Dizalti Corap kategorisine tiklar")
+    public void kullanici_acilan_menuden_dizalti_corap_kategorisine_tiklar() {
         homePage.dizaltiCorap.click();
     }
 
     @Given("Kullanici urun listesindeki ilk urunu tiklar")
     public void kullanici_urun_listesindeki_ilk_urunu_tiklar() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),5);
         wait.until(ExpectedConditions.visibilityOf(Driver.getDriver().findElement(By.xpath("//div[@class='products-list']"))));
         eklenenUrunName = dizaltiCorapPage.ilkUrunLink.getAttribute("title");
+        BrowserUtils.sleep(1);
         dizaltiCorapPage.ilkUrunLink.click();
     }
 

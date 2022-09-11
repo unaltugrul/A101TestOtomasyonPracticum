@@ -105,6 +105,9 @@ public class CheckoutPage {
     @FindBy(xpath = "(//div[@class='error checkout__error js-error-card_number '])[2]")
     public WebElement error2;
 
+    @FindBy(xpath = "//img[@alt='spinner']")
+    public WebElement spinner;
+
 
 
 

@@ -8,7 +8,7 @@ Feature:Sepete urun eklemek
   @TC002
   Scenario: Kullanici sepete urun ekleyebildigini dogrulamak
     Given Kullanici giyim ve aksesuar modulu uzerinde fareyi bekletir
-    When Kullanici acilan menuden Kadin Ic Giyim ve Dizalti Corap kategorisine tiklar
+    When Kullanici acilan menuden Dizalti Corap kategorisine tiklar
     And Kullanici urun listesindeki ilk urunu tiklar
     And Kullanici sepete ekle butonuna tiklar
     And Kullanici sepeti goruntule linkine tiklar

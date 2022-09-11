@@ -58,6 +58,7 @@ public class Test_steps {
 
             Actions actions1 = new Actions(Driver.getDriver());
             actions1.moveToElement(homePage.kategoriler).perform();
+            BrowserUtils.sleep(1);
             Actions actions2 = new Actions(Driver.getDriver());
             actions2.moveToElement(homePage.giyimAksesuar).perform();
 

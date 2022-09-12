@@ -73,7 +73,7 @@ public class Test_steps {
         homePage.dizaltiCorap.click();
     }
 
-    @Given("Kullanici urun listesindeki ilk urunu tiklar")
+    @And("Kullanici urun listesindeki ilk urunu tiklar")
     public void kullanici_urun_listesindeki_ilk_urunu_tiklar() {
         try {
             WebDriverWait wait = new WebDriverWait(Driver.getDriver(),5);

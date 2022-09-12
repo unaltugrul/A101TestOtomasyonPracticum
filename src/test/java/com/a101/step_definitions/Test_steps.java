@@ -75,8 +75,13 @@ public class Test_steps {
 
     @Given("Kullanici urun listesindeki ilk urunu tiklar")
     public void kullanici_urun_listesindeki_ilk_urunu_tiklar() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),5);
-        wait.until(ExpectedConditions.visibilityOf(Driver.getDriver().findElement(By.xpath("//div[@class='products-list']"))));
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(),5);
+            wait.until(ExpectedConditions.visibilityOf(Driver.getDriver().findElement(By.xpath("//div[@class='products-list']"))));
+        }catch (NoSuchElementException e){
+
+        }
+
         eklenenUrunName = dizaltiCorapPage.ilkUrunLink.getAttribute("title");
         BrowserUtils.sleep(1);
         dizaltiCorapPage.ilkUrunLink.click();

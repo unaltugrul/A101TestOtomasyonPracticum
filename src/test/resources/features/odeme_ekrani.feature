@@ -1,10 +1,9 @@
-Feature:Odeme Ekranına Ulasmak
+Feature:
 
   Background:
-    Given Kullanici "https://www.a101.com.tr/" adresine yonlenir
-    And Kullanici cerez kullanimini kabul eder
-    Then Kullanici basarili bir sekilde ana sayfaya ulasir
-
+    Given User navigates to "https://www.a101.com.tr/"
+    And User accepts cookies
+    Then Verify that user should be able to land on home page
   @TC003
   Scenario: Kullanicinin siparisi tamamlayabildigini dogrulamak
     Given Kullanici giyim ve aksesuar modulu uzerinde fareyi bekletir

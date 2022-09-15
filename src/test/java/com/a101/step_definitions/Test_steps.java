@@ -31,24 +31,27 @@ public class Test_steps {
     String eklenenUrunName;
     Faker faker = new Faker();
 
-    @Given("Kullanici {string} adresine yonlenir")
-    public void kullanici_adresine_yonlenir(String url) {
+
+
+
+    @Given("User navigates to {string}")
+    public void userNavigatesTo(String url) {
         Driver.getDriver().get(url);
     }
 
-    @Then("Kullanici basarili bir sekilde ana sayfaya ulasir")
-    public void kullanici_basarili_bir_sekilde_ana_sayfaya_ulasir() {
-        BrowserUtils.sleep(1);
-        Assert.assertEquals(Driver.getDriver().getCurrentUrl(),"https://www.a101.com.tr/");
-    }
-
-    @And("Kullanici cerez kullanimini kabul eder")
-    public void kullanici_cerez_kullanimini_kabul_eder() {
+    @And("User accepts cookies")
+    public void userAcceptsCookies() {
         try {
             homePage.cerezKabulButton.click();
         }catch (NoSuchElementException e){
 
         }
+    }
+
+    @Then("Verify that user should be able to land on home page")
+    public void verifyThatUserShouldBeAbleToLandOnHomePage() {
+        BrowserUtils.sleep(1);
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(),"https://www.a101.com.tr/");
     }
 
     @Given("Kullanici giyim ve aksesuar modulu uzerinde fareyi bekletir")
@@ -234,4 +237,6 @@ public class Test_steps {
 
 
     }
+
+
 }

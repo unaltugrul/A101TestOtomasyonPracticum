@@ -1,9 +1,9 @@
-Feature:Sepete urun eklemek
+Feature:
 
   Background:
-    Given Kullanici "https://www.a101.com.tr/" adresine yonlenir
-    And Kullanici cerez kullanimini kabul eder
-    Then Kullanici basarili bir sekilde ana sayfaya ulasir
+    Given User navigates to "https://www.a101.com.tr/"
+    And User accepts cookies
+    Then Verify that user should be able to land on home page
 
   @TC002
   Scenario: Kullanici sepete urun ekleyebildigini dogrulamak

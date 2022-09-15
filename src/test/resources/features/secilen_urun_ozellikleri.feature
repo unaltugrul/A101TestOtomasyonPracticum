@@ -1,8 +1,8 @@
-Feature:Kategoriden istenilen urunun secilmesi
+Feature:
   Background:
-    Given Kullanici "https://www.a101.com.tr/" adresine yonlenir
-    And Kullanici cerez kullanimini kabul eder
-    Then Kullanici basarili bir sekilde ana sayfaya ulasir
+    Given User navigates to "https://www.a101.com.tr/"
+    And User accepts cookies
+    Then Verify that user should be able to land on home page
 
   @TC001
   Scenario: Kullanicinin sectigi urunun rengini dogrulamak
@@ -10,3 +10,4 @@ Feature:Kategoriden istenilen urunun secilmesi
     When Kullanici acilan menuden Dizalti Corap kategorisine tiklar
     And Kullanici urun listesindeki ilk urunu tiklar
     Then Kullanici acilan urunun siyah oldugunu gorur
+

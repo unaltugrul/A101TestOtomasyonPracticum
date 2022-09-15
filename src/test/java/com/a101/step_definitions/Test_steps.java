@@ -54,9 +54,8 @@ public class Test_steps {
         Assert.assertEquals(Driver.getDriver().getCurrentUrl(),"https://www.a101.com.tr/");
     }
 
-    @Given("Kullanici giyim ve aksesuar modulu uzerinde fareyi bekletir")
-    public void kullanici_giyim_ve_aksesuar_modulu_uzerinde_fareyi_bekletir() {
-
+    @Given("User hovers mouse over <giyim ve aksesuar> module")
+    public void userHoversMouseOverGiyimVeAksesuarModule() {
         try {
 
             Actions actions1 = new Actions(Driver.getDriver());
@@ -71,13 +70,13 @@ public class Test_steps {
         }
     }
 
-    @Given("Kullanici acilan menuden Dizalti Corap kategorisine tiklar")
-    public void kullanici_acilan_menuden_dizalti_corap_kategorisine_tiklar() {
+    @When("User clicks <Dizaltı Çorap> category from opened submenu")
+    public void userClicksDizaltıÇorapCategoryFromOpenedSubmenu() {
         homePage.dizaltiCorap.click();
     }
 
-    @And("Kullanici urun listesindeki ilk urunu tiklar")
-    public void kullanici_urun_listesindeki_ilk_urunu_tiklar() {
+    @And("User clicks first product")
+    public void userClicksFirstProduct() {
         try {
             WebDriverWait wait = new WebDriverWait(Driver.getDriver(),5);
             wait.until(ExpectedConditions.visibilityOf(Driver.getDriver().findElement(By.xpath("//div[@class='products-list']"))));
@@ -87,14 +86,14 @@ public class Test_steps {
         }catch (NoSuchElementException e){
 
         }
-
-
     }
 
-    @Then("Kullanici acilan urunun siyah oldugunu gorur")
-    public void kullanici_acilan_urunun_siyah_oldugunu_gorur() {
+    @Then("Verify that color is black of the product")
+    public void verifyThatColorIsBlackOfTheProduct() {
         Assert.assertEquals("SİYAH",penKad50DenPanCorSiyah.renk.getText());
     }
+
+
 
     @When("Kullanici sepete ekle butonuna tiklar")
     public void kullanici_sepete_ekle_butonuna_tiklar() {
@@ -237,6 +236,7 @@ public class Test_steps {
 
 
     }
+
 
 
 }

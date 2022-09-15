@@ -48,8 +48,8 @@ public class Test_steps {
         }
     }
 
-    @Then("Verify that user should be able to land on home page")
-    public void verifyThatUserShouldBeAbleToLandOnHomePage() {
+    @Then("Verify that user lands on home page successfully")
+    public void verifyThatUserLandsOnHomePageSuccessfully() {
         BrowserUtils.sleep(1);
         Assert.assertEquals(Driver.getDriver().getCurrentUrl(),"https://www.a101.com.tr/");
     }
@@ -94,43 +94,77 @@ public class Test_steps {
     }
 
 
-
-    @When("Kullanici sepete ekle butonuna tiklar")
-    public void kullanici_sepete_ekle_butonuna_tiklar() {
+    @And("User clicks <Sepete Ekle> button")
+    public void userClicksSepeteEkleButton() {
         penKad50DenPanCorSiyah.sepeteEkleButon.click();
     }
 
-    @When("Kullanici sepeti goruntule linkine tiklar")
-    public void kullanici_sepeti_goruntule_linkine_tiklar() {
+    @When("User clicks <Sepeti Görüntüle> button")
+    public void userClicksSepetiGörüntüleButton() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
         wait.until(ExpectedConditions.visibilityOf(penKad50DenPanCorSiyah.sepetiGoruntule));
         penKad50DenPanCorSiyah.sepetiGoruntule.click();
     }
 
-    @Then("Kullanici ekledigi urunu sepette gorur")
-    public void kullanici_ekledigi_urunu_sepette_gorur() {
+    @Then("Verify that user can see the product in the basket")
+    public void verifyThatUserCanSeeTheProductInTheBasket() {
         Assert.assertEquals(eklenenUrunName,sepetPage.eklenenUrun.getAttribute("title"));
     }
-
-    @When("Kullanici sepeti onayla butonuna basar")
-    public void kullanici_sepeti_onayla_butonuna_basar() {
+    @And("User clicks <Sepeti Onayla> button")
+    public void userClicksSepetiOnaylaButton() {
         BrowserUtils.sleep(1);
         sepetPage.sepetiOnaylaButonu.click();
     }
-    @When("Kullanici uye olmadan devam et butonuna basar")
-    public void kullanici_uye_olmadan_devam_et_butonuna_basar() {
+
+    @And("User clicks <ÜYE OLMADAN DEVAM ET> button")
+    public void userClicksÜYEOLMADANDEVAMETButton() {
         checkoutPage.uyeOlmadanDevamButonu.click();
     }
-    @And("Kullanici mail adresini yazar enter tusuna basar")
-    public void kullaniciMailAdresiniYazarEnterTusunaBasar() {
+    @And("User enters email address and clicks enter key")
+    public void userEntersEmailAddressAndClicksEnterKey() {
         String email = faker.internet().emailAddress();
         checkoutPage.emailGirisKutusu.sendKeys(email + Keys.ENTER);
     }
-    @When("Kullanici yeni adres olustur linkine tiklar")
-    public void kullanici_yeni_adres_olustur_linkine_tiklar() {
+
+    @When("User clicks <Yeni adres oluştur> link")
+    public void userClicksYeniAdresOluşturLink() {
         checkoutPage.yeniAdresOlusturLink.click();
     }
-    @When("Kullanici adres basligi girer")
+
+    @And("User enters required information")
+    public void userEntersRequiredInformation() {
+        checkoutPage.adresBasligiKutusu.sendKeys(faker.address().firstName());
+        checkoutPage.adKutusu.sendKeys(faker.name().firstName());
+        checkoutPage.soyadKutusu.sendKeys(faker.name().lastName());
+        checkoutPage.telNumarasiKutusu.sendKeys("3126477178");
+
+        Select select = new Select(checkoutPage.ilDropdown);
+        select.selectByIndex(faker.number().numberBetween(2,82));
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='township']//option"))));
+        Select select1 = new Select(checkoutPage.ilceDropdown);
+        int ilceSay= checkoutPage.ilceSayisi();
+        select1.selectByIndex(faker.number().numberBetween(2,ilceSay));
+
+        Select select2 = new Select(checkoutPage.mahDropdown);
+        try {
+            WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
+            wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
+            int mahSay = checkoutPage.mahalleSayisi();
+            select2.selectByIndex(faker.number().numberBetween(2,mahSay));
+        }catch (Exception e){
+            int mahSay = checkoutPage.mahalleSayisi();
+            select2.selectByIndex(faker.number().numberBetween(2,mahSay));
+        }
+
+        checkoutPage.adreskutusu.sendKeys(faker.address().fullAddress());
+
+        checkoutPage.postKodKutusu.sendKeys(faker.numerify("#####"));
+    }
+
+
+    /*@When("Kullanici adres basligi girer")
     public void kullanici_adres_basligi_girer() {
         checkoutPage.adresBasligiKutusu.sendKeys(faker.address().firstName());
     }
@@ -180,26 +214,27 @@ public class Test_steps {
     @When("Kullanici posta kodu girer")
     public void kullanici_posta_kodu_girer() {
         checkoutPage.postKodKutusu.sendKeys(faker.numerify("#####"));
-    }
+    }*/
 
-    @When("Kullanici kaydet butonuna basar")
-    public void kullanici_kaydet_butonuna_basar() {
+    @And("User clicks <Kaydet> button")
+    public void userClicksKaydetButton() {
         checkoutPage.kaydetButonu.click();
     }
 
-    @And("Kullanici kargo firmasi secer")
-    public void kullaniciKargoFirmasiSecer() {
+    @And("User selects any radio button")
+    public void userSelectsAnyRadioButton() {
         BrowserUtils.sleep(2);
         checkoutPage.kargoFirButonlari.get(faker.number().numberBetween(0,checkoutPage.kargoFirButonlari.size()-1)).click();
     }
 
-    @When("Kullanici kaydet ve devam et butonuna tiklar")
-    public void kullanici_kaydet_ve_devam_et_butonuna_tiklar() {
+    @And("User clicks <Kaydet ve Devam Et> button")
+    public void userClicksKaydetVeDevamEtButton() {
         checkoutPage.kaydetDevamEtButonu.click();
     }
 
-    @And("Kullanici odeme bilgilerini girer ve sozlesmeyi kabul eder")
-    public void kullaniciOdemeBilgileriniGirerVeSozlesmeyiKabulEder() {
+
+    @And("User enters wrong payment information and selects checkbox")
+    public void userEntersWrongPaymentInformationAndSelectsCheckbox() {
         checkoutPage.adSoyadKutusu.sendKeys(faker.name().name() + " " + faker.name().lastName());
         checkoutPage.kartNumarasi.sendKeys(faker.numerify("################"));
         Select select = new Select(checkoutPage.kartAyDropdown);
@@ -215,28 +250,22 @@ public class Test_steps {
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
         jse.executeScript("arguments[0].click();", element);
         BrowserUtils.sleep(1);
-
     }
 
-    @And("Kullanici siparisi tamamla butonuna basar")
-    public void kullaniciSiparisiTamamlaButonunaBasar() {
+    @And("User clicks <Siparişi Tamamla> button")
+    public void userClicksSiparişiTamamlaButton() {
         checkoutPage.sipTamamlaButonu.click();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(),3);
         wait.until(ExpectedConditions.invisibilityOf(checkoutPage.spinner));
     }
 
-    @Then("Kullanici hata mesajini gorur")
-    public void kullaniciHataMesajiniGorur() {
-
+    @Then("Verify that user can see error message")
+    public void verifyThatUserCanSeeErrorMessage() {
         try {
             Assert.assertTrue(checkoutPage.error1.isDisplayed());
         }catch (Exception e){
             Assert.assertTrue(checkoutPage.error2.isDisplayed());
         }
-
-
     }
-
-
 
 }

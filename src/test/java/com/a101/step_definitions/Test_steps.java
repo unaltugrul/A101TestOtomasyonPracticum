@@ -184,8 +184,8 @@ public class Test_steps {
     }
 
 
-    @And("User enters wrong payment information and selects checkbox")
-    public void userEntersWrongPaymentInformationAndSelectsCheckbox() {
+    @And("User enters payment information and selects checkbox")
+    public void userEntersPaymentInformationAndSelectsCheckbox() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
         wait.until(ExpectedConditions.visibilityOf(checkoutPage.adSoyadKutusu));
         checkoutPage.adSoyadKutusu.sendKeys("Akbank");
@@ -242,8 +242,8 @@ public class Test_steps {
         checkoutPage.sipTamamlaButonu.click();
     }
 
-    @Then("Verify that user can see error message")
-    public void verifyThatUserCanSeeErrorMessage() {
+    @Then("Verify that user has been navigated to bank of page")
+    public void verifyThatUserHasBeenNavigatedToBankOfPage() {
 
         try {
             WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
@@ -254,9 +254,5 @@ public class Test_steps {
         Assert.assertTrue(Driver.getDriver().getTitle().equals("Redirect Page"));
         System.out.println("Driver.getDriver().getTitle() = " + Driver.getDriver().getTitle());
         System.out.println("Driver.getDriver().getCurrentUrl() = " + Driver.getDriver().getCurrentUrl());
-
-
-
     }
-
 }

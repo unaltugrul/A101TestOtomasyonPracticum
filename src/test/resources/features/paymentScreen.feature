@@ -19,9 +19,9 @@ Feature:
     And User clicks <Kaydet> button
     And User selects any radio button
     And User clicks <Kaydet ve Devam Et> button
-    And User enters wrong payment information and selects checkbox
+    And User enters payment information and selects checkbox
     And User clicks <Siparişi Tamamla> button
-    Then Verify that user can see error message
+    Then Verify that user has been navigated to bank of page
 
 
 

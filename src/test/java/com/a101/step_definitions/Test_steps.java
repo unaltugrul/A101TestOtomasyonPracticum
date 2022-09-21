@@ -9,6 +9,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.hu.De;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -17,6 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -160,64 +162,13 @@ public class Test_steps {
 
         checkoutPage.adreskutusu.sendKeys(faker.address().fullAddress());
 
-        checkoutPage.postKodKutusu.sendKeys(faker.numerify("#####"));
-    }
-
-
-    /*@When("Kullanici adres basligi girer")
-    public void kullanici_adres_basligi_girer() {
-        checkoutPage.adresBasligiKutusu.sendKeys(faker.address().firstName());
-    }
-    @When("Kullanici adini girer")
-    public void kullanici_adini_girer() {
-        checkoutPage.adKutusu.sendKeys(faker.name().firstName());
-    }
-    @When("Kullanici Soyadini girer")
-    public void kullanici_soyadini_girer() {
-        checkoutPage.soyadKutusu.sendKeys(faker.name().lastName());
-    }
-    @When("Kullanici cep telefon numarasini girer")
-    public void kullanici_cep_telefon_numarasini_girer() {
-        checkoutPage.telNumarasiKutusu.sendKeys("3126477178");
-    }
-    @When("Kullanici il secer")
-    public void kullanici_il_secer() {
-        Select select = new Select(checkoutPage.ilDropdown);
-        select.selectByIndex(faker.number().numberBetween(2,82));
-    }
-    @When("Kullanici ilce secer")
-    public void kullanici_ilce_secer() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='township']//option"))));
-        Select select1 = new Select(checkoutPage.ilceDropdown);
-        int ilceSay= checkoutPage.ilceSayisi();
-        select1.selectByIndex(faker.number().numberBetween(2,ilceSay));
+        //checkoutPage.postKodKutusu.sendKeys(faker.numerify("#####"));
 
     }
-    @When("Kullanici mahalle secer")
-    public void kullanici_mahalle_secer() {
-        Select select2 = new Select(checkoutPage.mahDropdown);
-        try {
-            WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
-            wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
-            int mahSay = checkoutPage.mahalleSayisi();
-            select2.selectByIndex(faker.number().numberBetween(2,mahSay));
-        }catch (Exception e){
-            int mahSay = checkoutPage.mahalleSayisi();
-            select2.selectByIndex(faker.number().numberBetween(2,mahSay));
-        }
-    }
-    @When("Kullanici adres girer")
-    public void kullanici_adres_girer() {
-        checkoutPage.adreskutusu.sendKeys(faker.address().fullAddress());
-    }
-    @When("Kullanici posta kodu girer")
-    public void kullanici_posta_kodu_girer() {
-        checkoutPage.postKodKutusu.sendKeys(faker.numerify("#####"));
-    }*/
 
     @And("User clicks <Kaydet> button")
     public void userClicksKaydetButton() {
+
         checkoutPage.kaydetButonu.click();
     }
 
@@ -235,16 +186,50 @@ public class Test_steps {
 
     @And("User enters wrong payment information and selects checkbox")
     public void userEntersWrongPaymentInformationAndSelectsCheckbox() {
-        checkoutPage.adSoyadKutusu.sendKeys(faker.name().name() + " " + faker.name().lastName());
-        checkoutPage.kartNumarasi.sendKeys(faker.numerify("################"));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        wait.until(ExpectedConditions.visibilityOf(checkoutPage.adSoyadKutusu));
+        checkoutPage.adSoyadKutusu.sendKeys("Akbank");
+        //checkoutPage.kartNumarasi.sendKeys(faker.numerify("################"));
+
+
+        BrowserUtils.sleep(1);
+        //checkoutPage.kartNumarasi.sendKeys(faker.numerify("4355084355084358"));
+
+        checkoutPage.kartNumarasi.sendKeys("");
+        checkoutPage.kartNumarasi.sendKeys("4");
+        checkoutPage.kartNumarasi.sendKeys("3");
+        checkoutPage.kartNumarasi.sendKeys("5");
+        checkoutPage.kartNumarasi.sendKeys("5");
+
+        checkoutPage.kartNumarasi.sendKeys("");
+        checkoutPage.kartNumarasi.sendKeys("0");
+        checkoutPage.kartNumarasi.sendKeys("8");
+        checkoutPage.kartNumarasi.sendKeys("4");
+        checkoutPage.kartNumarasi.sendKeys("3");
+
+        checkoutPage.kartNumarasi.sendKeys("");
+        checkoutPage.kartNumarasi.sendKeys("5");
+        checkoutPage.kartNumarasi.sendKeys("5");
+        checkoutPage.kartNumarasi.sendKeys("0");
+        checkoutPage.kartNumarasi.sendKeys("8");
+
+        checkoutPage.kartNumarasi.sendKeys("");
+        checkoutPage.kartNumarasi.sendKeys("4");
+        checkoutPage.kartNumarasi.sendKeys("3");
+        checkoutPage.kartNumarasi.sendKeys("5");
+        checkoutPage.kartNumarasi.sendKeys("8");
+
+
         Select select = new Select(checkoutPage.kartAyDropdown);
-        select.selectByIndex(faker.number().numberBetween(1,12));
-
+        //select.selectByIndex(faker.number().numberBetween(1,12));
+        select.selectByValue("12");
+        BrowserUtils.sleep(1);
         Select select1 = new Select(checkoutPage.kartYilDropdown);
-        select1.selectByIndex(faker.number().numberBetween(1,12));
+        //select1.selectByIndex(faker.number().numberBetween(1,12));
+        select1.selectByValue("2026");
 
-        String cvc = String.valueOf(faker.number().numberBetween(100,999));
-        checkoutPage.cvcKutusu.sendKeys(cvc);
+        //String cvc = String.valueOf(faker.number().numberBetween(100,999));
+        checkoutPage.cvcKutusu.sendKeys("000");
 
         WebElement element = checkoutPage.kontrolKutusu;
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
@@ -255,17 +240,23 @@ public class Test_steps {
     @And("User clicks <Siparişi Tamamla> button")
     public void userClicksSiparişiTamamlaButton() {
         checkoutPage.sipTamamlaButonu.click();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),3);
-        wait.until(ExpectedConditions.invisibilityOf(checkoutPage.spinner));
     }
 
     @Then("Verify that user can see error message")
     public void verifyThatUserCanSeeErrorMessage() {
+
         try {
-            Assert.assertTrue(checkoutPage.error1.isDisplayed());
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+            wait.until(ExpectedConditions.urlMatches("https://3dsecure.akbank.com.tr/akbankacs/result.do"));
         }catch (Exception e){
-            Assert.assertTrue(checkoutPage.error2.isDisplayed());
+
         }
+        Assert.assertTrue(Driver.getDriver().getTitle().equals("Redirect Page"));
+        System.out.println("Driver.getDriver().getTitle() = " + Driver.getDriver().getTitle());
+        System.out.println("Driver.getDriver().getCurrentUrl() = " + Driver.getDriver().getCurrentUrl());
+
+
+
     }
 
 }

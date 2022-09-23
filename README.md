@@ -14,4 +14,4 @@ mvn test
 ```
 105.0.5195.127 (Official Build) (64-bit)
 ```
-https://github.com/unaltugrul/A101TestOtomasyonPracticum/blob/7c0656e2d697dc82899c1b0503cbb6b973d55907/README.md
+https://github.com/unaltugrul/A101TestOtomasyonPracticum/blob/localMaster/23.09.2022_16.21.55_REC.gif

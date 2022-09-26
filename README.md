@@ -1,4 +1,4 @@
-# A101TestOtomasyonPracticum
+# A101TestOtomasyonPracticum Web App and Mobile App
 
 
 

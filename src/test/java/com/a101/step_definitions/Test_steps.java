@@ -242,8 +242,8 @@ public class Test_steps {
         checkoutPage.sipTamamlaButonu.click();
     }
 
-    @Then("Verify that user has been navigated to bank of page")
-    public void verifyThatUserHasBeenNavigatedToBankOfPage() {
+    @Then("Verify that user has been navigated to page of bank")
+    public void verifyThatUserHasBeenNavigatedToPageOfBank() {
 
         try {
             WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);

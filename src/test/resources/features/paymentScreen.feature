@@ -21,7 +21,7 @@ Feature:
     And User clicks <Kaydet ve Devam Et> button
     And User enters payment information and selects checkbox
     And User clicks <Siparişi Tamamla> button
-    Then Verify that user has been navigated to bank of page
+    Then Verify that user has been navigated to page of bank
 
 
 

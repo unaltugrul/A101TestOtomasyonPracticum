@@ -10,9 +10,7 @@ Chrome Browser Version --> 105.0.5195.127 (Official Build) (64-bit)
 ```
 ![](https://github.com/unaltugrul/A101TestOtomasyonPracticum/blob/localMaster/23.09.2022_16.21.55_REC.gif)
 
-<br />
------------------------------------------------------------------------------------------------------------------------------------------
-<br />
+##   
 
 # Please click to go [Mobile App Automation](https://github.com/unaltugrul/a101MobileApp1/).
 ## Mobile Setup

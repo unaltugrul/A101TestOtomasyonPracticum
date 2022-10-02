@@ -34,8 +34,6 @@ public class Test_steps {
     Faker faker = new Faker();
 
 
-
-
     @Given("User navigates to {string}")
     public void userNavigatesTo(String url) {
         Driver.getDriver().get(url);
@@ -45,7 +43,7 @@ public class Test_steps {
     public void userAcceptsCookies() {
         try {
             homePage.cerezKabulButton.click();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
 
         }
     }
@@ -53,7 +51,7 @@ public class Test_steps {
     @Then("Verify that user lands on home page successfully")
     public void verifyThatUserLandsOnHomePageSuccessfully() {
         BrowserUtils.sleep(1);
-        Assert.assertEquals(Driver.getDriver().getCurrentUrl(),"https://www.a101.com.tr/");
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(), "https://www.a101.com.tr/");
     }
 
     @Given("User hovers mouse over <giyim ve aksesuar> module")
@@ -66,7 +64,7 @@ public class Test_steps {
             Actions actions2 = new Actions(Driver.getDriver());
             actions2.moveToElement(homePage.giyimAksesuar).perform();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Actions actions = new Actions(Driver.getDriver());
             actions.moveToElement(homePage.giyimAksesuarModul).perform();
         }
@@ -80,19 +78,19 @@ public class Test_steps {
     @And("User clicks first product")
     public void userClicksFirstProduct() {
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(),5);
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
             wait.until(ExpectedConditions.visibilityOf(Driver.getDriver().findElement(By.xpath("//div[@class='products-list']"))));
             eklenenUrunName = dizaltiCorapPage.ilkUrunLink.getAttribute("title");
             BrowserUtils.sleep(1);
             dizaltiCorapPage.ilkUrunLink.click();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
 
         }
     }
 
     @Then("Verify that color is black of the product")
     public void verifyThatColorIsBlackOfTheProduct() {
-        Assert.assertEquals("SİYAH",penKad50DenPanCorSiyah.renk.getText());
+        Assert.assertEquals("SİYAH", penKad50DenPanCorSiyah.renk.getText());
     }
 
 
@@ -103,15 +101,16 @@ public class Test_steps {
 
     @When("User clicks <Sepeti Görüntüle> button")
     public void userClicksSepetiGörüntüleButton() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         wait.until(ExpectedConditions.visibilityOf(penKad50DenPanCorSiyah.sepetiGoruntule));
         penKad50DenPanCorSiyah.sepetiGoruntule.click();
     }
 
     @Then("Verify that user can see the product in the basket")
     public void verifyThatUserCanSeeTheProductInTheBasket() {
-        Assert.assertEquals(eklenenUrunName,sepetPage.eklenenUrun.getAttribute("title"));
+        Assert.assertEquals(eklenenUrunName, sepetPage.eklenenUrun.getAttribute("title"));
     }
+
     @And("User clicks <Sepeti Onayla> button")
     public void userClicksSepetiOnaylaButton() {
         BrowserUtils.sleep(1);
@@ -122,6 +121,7 @@ public class Test_steps {
     public void userClicksÜYEOLMADANDEVAMETButton() {
         checkoutPage.uyeOlmadanDevamButonu.click();
     }
+
     @And("User enters email address and clicks enter key")
     public void userEntersEmailAddressAndClicksEnterKey() {
         String email = faker.internet().emailAddress();
@@ -141,23 +141,23 @@ public class Test_steps {
         checkoutPage.telNumarasiKutusu.sendKeys("3126477178");
 
         Select select = new Select(checkoutPage.ilDropdown);
-        select.selectByIndex(faker.number().numberBetween(2,82));
+        select.selectByIndex(faker.number().numberBetween(2, 82));
 
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='township']//option"))));
         Select select1 = new Select(checkoutPage.ilceDropdown);
-        int ilceSay= checkoutPage.ilceSayisi();
-        select1.selectByIndex(faker.number().numberBetween(2,ilceSay));
+        int ilceSay = checkoutPage.ilceSayisi();
+        select1.selectByIndex(faker.number().numberBetween(2, ilceSay));
 
         Select select2 = new Select(checkoutPage.mahDropdown);
         try {
-            WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(),10);
+            WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 10);
             wait1.until(ExpectedConditions.visibilityOfAllElements(Driver.getDriver().findElement(By.xpath("//select[@name='district']//option"))));
             int mahSay = checkoutPage.mahalleSayisi();
-            select2.selectByIndex(faker.number().numberBetween(2,mahSay));
-        }catch (Exception e){
+            select2.selectByIndex(faker.number().numberBetween(2, mahSay));
+        } catch (Exception e) {
             int mahSay = checkoutPage.mahalleSayisi();
-            select2.selectByIndex(faker.number().numberBetween(2,mahSay));
+            select2.selectByIndex(faker.number().numberBetween(2, mahSay));
         }
 
         checkoutPage.adreskutusu.sendKeys(faker.address().fullAddress());
@@ -175,7 +175,7 @@ public class Test_steps {
     @And("User selects any radio button")
     public void userSelectsAnyRadioButton() {
         BrowserUtils.sleep(2);
-        checkoutPage.kargoFirButonlari.get(faker.number().numberBetween(0,checkoutPage.kargoFirButonlari.size()-1)).click();
+        checkoutPage.kargoFirButonlari.get(faker.number().numberBetween(0, checkoutPage.kargoFirButonlari.size() - 1)).click();
     }
 
     @And("User clicks <Kaydet ve Devam Et> button")
@@ -186,7 +186,7 @@ public class Test_steps {
 
     @And("User enters payment information and selects checkbox")
     public void userEntersPaymentInformationAndSelectsCheckbox() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         wait.until(ExpectedConditions.visibilityOf(checkoutPage.adSoyadKutusu));
         checkoutPage.adSoyadKutusu.sendKeys("Akbank");
         //checkoutPage.kartNumarasi.sendKeys(faker.numerify("################"));
@@ -246,9 +246,9 @@ public class Test_steps {
     public void verifyThatUserHasBeenNavigatedToPageOfBank() {
 
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
             wait.until(ExpectedConditions.urlMatches("https://3dsecure.akbank.com.tr/akbankacs/result.do"));
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         Assert.assertTrue(Driver.getDriver().getTitle().equals("Redirect Page"));

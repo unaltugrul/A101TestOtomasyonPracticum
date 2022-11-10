@@ -66,7 +66,7 @@ public class CheckoutPage {
 
     //************** Kargo bilgileri kısmı
 
-    @FindBy(xpath = "//button[@class='button green js-set-country js-prevent-emoji']")
+    @FindBy(xpath = "//button[contains(text(),'KAYDET')]")
     public WebElement kaydetButonu;
 
     @FindBy(xpath = "//ul[@class='js-shipping-list']//div[@class='check']")
